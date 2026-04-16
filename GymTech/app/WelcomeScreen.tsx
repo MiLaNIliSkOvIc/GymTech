@@ -1,20 +1,19 @@
 import React from "react";
 import {
-    Dimensions,
-    ImageBackground,
-    Platform,
-    SafeAreaView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  Dimensions,
+  ImageBackground,
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 // ── Replace this with your actual image path ──
 // e.g. const BG = require('./assets/gymshark_bg.jpg');
-const BG = { uri: "https://your-image-url-here.jpg" };
-
+const BG = require("../assets/images/gymPhoto.jpg");
 const { width, height } = Dimensions.get("window");
 
 interface WelcomeScreenProps {
@@ -44,16 +43,7 @@ export default function WelcomeScreen({
         <SafeAreaView style={styles.safeArea}>
           {/* ── Top bar ── */}
           <View style={styles.topBar}>
-            <Text style={styles.logo}>GYMSHARK</Text>
-
-            <TouchableOpacity
-              style={styles.closeBtn}
-              onPress={onClose}
-              activeOpacity={0.7}
-              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-            >
-              <Text style={styles.closeIcon}>✕</Text>
-            </TouchableOpacity>
+            <Text style={styles.logo}>GYMTECH</Text>
           </View>
 
           {/* ── Spacer – pushes CTA to bottom ── */}
@@ -134,10 +124,12 @@ const styles = StyleSheet.create({
 
   logo: {
     color: "#FFFFFF",
-    fontSize: 22,
+    fontSize: 20,
+    left: "10%",
     fontWeight: "900",
+    top: "70%",
     letterSpacing: 2.5,
-    fontFamily: Platform.OS === "ios" ? "Georgia" : "serif",
+    fontFamily: Platform.OS === "ios" ? "Roboto" : "serif",
   },
 
   closeBtn: {
@@ -163,7 +155,7 @@ const styles = StyleSheet.create({
     // Soft black fade behind the text area
     paddingTop: 60,
     // Using a background colour here instead of a true gradient keeps zero deps
-    backgroundColor: "rgba(0,0,0,0.55)",
+
     marginHorizontal: -20, // bleed to screen edges
     paddingHorizontal: 20,
   },
@@ -181,7 +173,7 @@ const styles = StyleSheet.create({
 
   // ── Buttons ─────────────────────────────────
   primaryBtn: {
-    width: "100%",
+    width: "80%",
     height: 54,
     backgroundColor: "#FFFFFF",
     borderRadius: 100,

@@ -18,7 +18,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="WelcomeScreen"
+        name="index"
         options={{
           title: "Home",
           tabBarIcon: ({ color }) => (
