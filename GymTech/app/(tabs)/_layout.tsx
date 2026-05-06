@@ -26,10 +26,6 @@ export default function TabLayout() {
         name="explore"
         options={{ title: "Explore" }}
       />
-      <Tabs.Screen
-        name="WelcomeScreen"
-        options={{ title: "Welcome" }}
-      />
     </Tabs>
   );
 }

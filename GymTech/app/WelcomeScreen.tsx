@@ -10,12 +10,21 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { router } from "expo-router";
 
 const BG = require("../assets/images/gymPhoto.jpg");
 const { width, height } = Dimensions.get("window");
 
-export default function WelcomeScreen() {
+interface WelcomeScreenProps {
+  onCreateAccount?: () => void;
+  onLogin?: () => void;
+  onClose?: () => void;
+}
+
+export default function WelcomeScreen({
+  onCreateAccount,
+  onLogin,
+  onClose,
+}: WelcomeScreenProps) {
   return (
     <View style={styles.root}>
       <StatusBar
@@ -24,32 +33,39 @@ export default function WelcomeScreen() {
         backgroundColor="transparent"
       />
 
+      {/* ── Background image ── */}
       <ImageBackground source={BG} style={styles.background} resizeMode="cover">
+        {/* Dark vignette overlay at the bottom */}
         <View style={styles.gradientOverlay} />
 
         <SafeAreaView style={styles.safeArea}>
+          {/* ── Top bar ── */}
           <View style={styles.topBar}>
             <Text style={styles.logo}>GYMTECH</Text>
           </View>
 
+          {/* ── Spacer – pushes CTA to bottom ── */}
           <View style={styles.flex} />
 
+          {/* ── Bottom CTA section ── */}
           <View style={styles.cta}>
             <Text style={styles.tagline}>
               The best of Gymshark, anytime, anywhere.
             </Text>
 
+            {/* CREATE ACCOUNT */}
             <TouchableOpacity
               style={styles.primaryBtn}
-              onPress={() => router.push("/login")}
+              onPress={onCreateAccount}
               activeOpacity={0.85}
             >
               <Text style={styles.primaryBtnText}>CREATE ACCOUNT</Text>
             </TouchableOpacity>
 
+            {/* LOG IN */}
             <TouchableOpacity
               style={styles.secondaryBtn}
-              onPress={() => router.push("/login")}
+              onPress={onLogin}
               activeOpacity={0.7}
             >
               <Text style={styles.secondaryBtnText}>LOG IN</Text>
@@ -96,6 +112,20 @@ const styles = StyleSheet.create({
     top: "70%",
     letterSpacing: 2.5,
     fontFamily: Platform.OS === "ios" ? "Roboto" : "serif",
+  },
+  closeBtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "rgba(50,50,50,0.75)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  closeIcon: {
+    color: "#FFFFFF",
+    fontSize: 15,
+    fontWeight: "600",
+    lineHeight: 18,
   },
   cta: {
     paddingBottom: 36,
