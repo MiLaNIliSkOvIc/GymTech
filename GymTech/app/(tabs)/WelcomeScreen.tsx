@@ -1,54 +1,74 @@
-import React from 'react';
+import React from "react";
 import {
-  Dimensions,
-  ImageBackground,
-  Platform,
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import { router } from 'expo-router';
+    Dimensions,
+    ImageBackground,
+    Platform,
+    SafeAreaView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from "react-native";
+import { router } from "expo-router";
 
-const BG = { uri: 'https://your-image-url-here.jpg' };
+// ── Replace this with your actual image path ──
+// e.g. const BG = require('./assets/gymshark_bg.jpg');
+const BG = { uri: "https://your-image-url-here.jpg" };
 
-const { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get("window");
 
 export default function WelcomeScreen() {
   return (
     <View style={styles.root}>
-      <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
+      <StatusBar
+        barStyle="light-content"
+        translucent
+        backgroundColor="transparent"
+      />
 
+      {/* ── Background image ── */}
       <ImageBackground source={BG} style={styles.background} resizeMode="cover">
+        {/* Dark vignette overlay at the bottom */}
         <View style={styles.gradientOverlay} />
 
         <SafeAreaView style={styles.safeArea}>
-          {/* Top bar */}
+          {/* ── Top bar ── */}
           <View style={styles.topBar}>
-            <Text style={styles.logo}>GYMTECH</Text>
-          </View>
-
-          <View style={styles.flex} />
-
-          {/* Bottom CTA */}
-          <View style={styles.cta}>
-            <Text style={styles.tagline}>
-              The best of GymTech, anytime, anywhere.
-            </Text>
+            <Text style={styles.logo}>GYMSHARK</Text>
 
             <TouchableOpacity
+              style={styles.closeBtn}
+              onPress={() => router.back()}
+              activeOpacity={0.7}
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            >
+              <Text style={styles.closeIcon}>✕</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* ── Spacer – pushes CTA to bottom ── */}
+          <View style={styles.flex} />
+
+          {/* ── Bottom CTA section ── */}
+          <View style={styles.cta}>
+            <Text style={styles.tagline}>
+              The best of Gymshark, anytime, anywhere.
+            </Text>
+
+            {/* CREATE ACCOUNT */}
+            <TouchableOpacity
               style={styles.primaryBtn}
-              onPress={() => router.push('/login')}
+              onPress={() => router.push("/login")}
               activeOpacity={0.85}
             >
               <Text style={styles.primaryBtnText}>CREATE ACCOUNT</Text>
             </TouchableOpacity>
 
+            {/* LOG IN */}
             <TouchableOpacity
               style={styles.secondaryBtn}
-              onPress={() => router.push('/login')}
+              onPress={() => router.push("/login")}
               activeOpacity={0.7}
             >
               <Text style={styles.secondaryBtnText}>LOG IN</Text>
@@ -60,69 +80,98 @@ export default function WelcomeScreen() {
   );
 }
 
+// ─────────────────────────────────────────────
 const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: '#000' },
+  root: {
+    flex: 1,
+    backgroundColor: "#000",
+  },
 
-  background: { flex: 1, width, height },
+  // ── Background ──────────────────────────────
+  background: {
+    flex: 1,
+    width,
+    height,
+  },
 
   gradientOverlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
   },
 
+  // ── Layout ──────────────────────────────────
   safeArea: {
     flex: 1,
     paddingHorizontal: 20,
     paddingTop:
-      Platform.OS === 'android' ? (StatusBar.currentHeight ?? 0) + 8 : 0,
+      Platform.OS === "android" ? (StatusBar.currentHeight ?? 0) + 8 : 0,
   },
 
   flex: { flex: 1 },
 
+  // ── Top bar ─────────────────────────────────
   topBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingTop: 12,
   },
 
   logo: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 22,
-    fontWeight: '900',
+    fontWeight: "900",
     letterSpacing: 2.5,
-    fontFamily: Platform.OS === 'ios' ? 'Georgia' : 'serif',
+    fontFamily: Platform.OS === "ios" ? "Georgia" : "serif",
   },
 
+  closeBtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "rgba(50,50,50,0.75)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  closeIcon: {
+    color: "#FFFFFF",
+    fontSize: 15,
+    fontWeight: "600",
+    lineHeight: 18,
+  },
+
+  // ── Bottom CTA section ───────────────────────
   cta: {
     paddingBottom: 36,
-    alignItems: 'center',
+    alignItems: "center",
     paddingTop: 60,
-    backgroundColor: 'rgba(0,0,0,0.55)',
+    backgroundColor: "rgba(0,0,0,0.55)",
     marginHorizontal: -20,
     paddingHorizontal: 20,
   },
 
   tagline: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 16,
-    fontWeight: '400',
-    textAlign: 'center',
+    fontWeight: "400",
+    textAlign: "center",
     letterSpacing: 0.3,
     lineHeight: 24,
     marginBottom: 28,
-    fontFamily: Platform.OS === 'ios' ? 'Helvetica Neue' : 'sans-serif-light',
+    fontFamily: Platform.OS === "ios" ? "Helvetica Neue" : "sans-serif-light",
   },
 
+  // ── Buttons ─────────────────────────────────
   primaryBtn: {
-    width: '100%',
+    width: "100%",
     height: 54,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     borderRadius: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginBottom: 4,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.25,
     shadowRadius: 8,
@@ -130,12 +179,12 @@ const styles = StyleSheet.create({
   },
 
   primaryBtnText: {
-    color: '#000000',
+    color: "#000000",
     fontSize: 14,
-    fontWeight: '800',
+    fontWeight: "800",
     letterSpacing: 2,
     fontFamily:
-      Platform.OS === 'ios' ? 'Helvetica Neue' : 'sans-serif-condensed',
+      Platform.OS === "ios" ? "Helvetica Neue" : "sans-serif-condensed",
   },
 
   secondaryBtn: {
@@ -145,11 +194,11 @@ const styles = StyleSheet.create({
   },
 
   secondaryBtnText: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 14,
-    fontWeight: '800',
+    fontWeight: "800",
     letterSpacing: 2,
     fontFamily:
-      Platform.OS === 'ios' ? 'Helvetica Neue' : 'sans-serif-condensed',
+      Platform.OS === "ios" ? "Helvetica Neue" : "sans-serif-condensed",
   },
 });
