@@ -13,7 +13,7 @@ import {
 
 // ── Replace this with your actual image path ──
 // e.g. const BG = require('./assets/gymshark_bg.jpg');
-const BG = require("../assets/images/gymPhoto.jpg");
+const BG = require("../assets/images/gym2.jpg");
 const { width, height } = Dimensions.get("window");
 
 interface WelcomeScreenProps {
@@ -52,7 +52,7 @@ export default function WelcomeScreen({
           {/* ── Bottom CTA section ── */}
           <View style={styles.cta}>
             <Text style={styles.tagline}>
-              The best of Gymshark, anytime, anywhere.
+              The best of GymTech, anytime, anywhere.
             </Text>
 
             {/* CREATE ACCOUNT */}
@@ -203,8 +203,8 @@ const styles = StyleSheet.create({
   },
 
   secondaryBtnText: {
-    color: "#FFFFFF",
-    fontSize: 14,
+    color: "#6d1010",
+    fontSize: 16,
     fontWeight: "800",
     letterSpacing: 2,
     fontFamily:

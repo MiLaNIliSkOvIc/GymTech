@@ -2,7 +2,6 @@ import { Tabs } from "expo-router";
 import React from "react";
 
 import { HapticTab } from "@/components/haptic-tab";
-import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Colors } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 
@@ -18,18 +17,7 @@ export default function TabLayout() {
         tabBarStyle: { display: "none" },
       }}
     >
-      <Tabs.Screen
-        name="index"
-        options={{ title: "Home" }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{ title: "Explore" }}
-      />
-      <Tabs.Screen
-        name="WelcomeScreen"
-        options={{ title: "Welcome" }}
-      />
+      <Tabs.Screen name="WelcomeScreen" options={{ title: "Welcome" }} />
     </Tabs>
   );
 }
